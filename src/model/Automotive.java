@@ -1,12 +1,15 @@
 package model;
+import java.io.Serializable;
+
 import util.FileIO;
 
-public class Automotive {
+public class Automotive implements Serializable {
 
 	private String model = "NULL";
 	private double basePrice = -1.0;
 	private double totalPrice = -1.0;
 	private OptionSet[] optionsArr = new OptionSet[50]; 
+	private int optPos = 0;
 	
 	//Automotive Constructor
 	public Automotive() {
@@ -15,10 +18,10 @@ public class Automotive {
 		}
 	};
 	public Automotive(String model, double price, String options){
-		FileIO file = new FileIO();
+		/*FileIO file = new FileIO();
 		this.model = model;
 		basePrice = price;
-		parseString(file.readFile("Ford's Focus Wagon ZTW.txt"));
+		parseString(file.readFile("Ford's Focus Wagon ZTW.txt"));*/
 	}
 	
 	public String getModel() {return model;}
@@ -28,7 +31,24 @@ public class Automotive {
 	
 	public void setModel(String model) {this.model = model;}
 	public void setBasePrice(double price) {basePrice = price;}
-	public void setOptionsArr()
+	public void setOption(String line) {
+		optionsArr[optPos].setOption(line, optPos);
+		optPos++;
+	}
+	public String toString() {
+		StringBuilder temp = new StringBuilder("Name:");
+		temp.append(model);
+		temp.append("\nBase:");
+		temp.append(basePrice);
+		temp.append("\n");
+		for(int i = 0; i < optionsArr.length; i++){
+			if(optionsArr[i].getName() != "NULL"){
+				temp.append(optionsArr[i].toString());
+				temp.append("\n");
+			}
+		}
+		return temp.toString();
+	}
 	
 
 }

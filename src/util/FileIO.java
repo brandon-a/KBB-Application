@@ -1,44 +1,22 @@
 package util;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
+import java.io.Serializable;
 import model.Automotive;
 
-public class FileIO {
+public class FileIO implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	public FileIO(){}
 	
 	//Reads the file line by line and returns an array of strings.
-	public String[] buildAutoObject(String fileName){
-		java.io.File inFile = new java.io.File(fileName);
-		String fileArr[] = new String[50];
-		Scanner scanner;
-		int lineNum = 0;
-		try {
-			scanner = new Scanner(inFile);
-			while(scanner.hasNext()){
-				String input = scanner.nextLine();
-				if(input != null){
-					fileArr[lineNum] = input;
-				}
-				else
-					System.out.println("Error reading line #" + lineNum + " in the file, continuing to read data...");
-				lineNum++;
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		return fileArr;
-	}
-	private void test(String fileName){
+	public Automotive buildAutoObject(String fileName){
+		Automotive tAuto = new Automotive();
 		try {
 				FileReader file = new FileReader(fileName);
 				BufferedReader buff = new BufferedReader(file);
 				boolean eof = false;
-				Automotive tAuto = new Automotive();
 				while (!eof) {
 					String line = buff.readLine();
 					if (line == null)
@@ -46,17 +24,23 @@ public class FileIO {
 					else{
 						if(line.startsWith("Option:")){
 							String tString = line.substring(7);
-							optionsArr[i].setOptions(tString);
+							tAuto.setOption(tString);
 						}
-						else{
-							tAuto.setModel(line);
+						else if(line.startsWith("Base:")){
+							tAuto.setBasePrice(Double.parseDouble(line.substring(5)));
+						}
+						else if(line.startsWith("Name:")){
+							tAuto.setModel(line.substring(5));
 						}
 					}
 				}
 				buff.close();
 			} catch (IOException e) {
 				System.out.println("Error нн " + e.toString());
+				return null;
 			}
+		return tAuto;
+		
 	}
-
+	
 }
