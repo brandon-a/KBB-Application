@@ -8,23 +8,23 @@ public class Main {
 		//Build Automobile Object from a file.
 		FileIO file = new FileIO();
 		Automotive FordZTW = file.buildAutoObject("Ford's Focus Wagon ZTW.txt");
-		System.out.println(FordZTW.toString());
+		
 
 		//Print attributes before serialization
 
-		//FordZTW.print();
+		System.out.println(FordZTW.toString());
 
 		//Serialize the object
 
-		//Lab1.autoutil.FileIO.serializeAuto(FordZTW);
+		file.serializeObject(FordZTW, "Ford_ZTW.dat");
 
 		//Deserialize the object and read it into memory.
 
-		//Automobile newFordZTW = Lab1.autoutil.FileIO.DeserializeAuto("auto.ser");
+		Automotive newFordZTW = file.deSerializeObject("Ford_ZTW.dat");
 
 		//Print new attributes.
 
-		//newFordZTW.print();
+		System.out.println(newFordZTW.toString());
 
 	}
 

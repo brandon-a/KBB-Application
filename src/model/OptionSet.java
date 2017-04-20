@@ -3,14 +3,17 @@
 
 package model;
 
+import java.io.Serializable;
+
 //OptionSet class contains an array of options.
-public class OptionSet {
+public class OptionSet implements Serializable {
 
 	//instance variables
 	private String name = "NULL";
 	private Double costOfSelection = -1.0;
 	private Option[] optionArr = new Option[50];
 	private int selection = -1;
+	private int optPos = 0;
 	
 	//Default constructor
 	OptionSet() {
@@ -33,7 +36,7 @@ public class OptionSet {
 	//setters
 	protected void setName(String name) {this.name = name;}
 	protected void setCost(double cost) {costOfSelection = cost;}
-	protected void setOption(String option, int optPos){
+	protected void setOption(String option){
 		String[] namNOptions = option.split(":");
 		name = namNOptions[0];
 		String[] optionSArr = namNOptions[1].split(", ");
@@ -41,6 +44,7 @@ public class OptionSet {
 		for(int i = 0; i < length; i+=2){
 			optionArr[optPos].setSelection(optionSArr[i]);
 			optionArr[optPos].setCost(Double.parseDouble(optionSArr[i+1]));
+			optPos++;
 			}
 	}
 	
@@ -55,14 +59,14 @@ public class OptionSet {
 		StringBuilder temp = new StringBuilder(name);
 		temp.append(":");
 		for(int i = 0; i < optionArr.length; i++){
-			if(optionArr[i].getSelection() != "NULL")
+			if(!optionArr[i].getSelection().equals("NULL"))
 				temp.append(optionArr[i].toString());
 		}
 		return temp.toString();
 	}
 	
 	//Option class that contains one selection each
-	protected class Option {
+	protected class Option implements Serializable {
 		Option() {}
 		//instance variables
 		private String selection = "NULL";
@@ -80,6 +84,7 @@ public class OptionSet {
 			StringBuilder temp = new StringBuilder(selection);
 			temp.append(", ");
 			temp.append(cost);
+			temp.append(", ");
 			return temp.toString();
 		}
 	}

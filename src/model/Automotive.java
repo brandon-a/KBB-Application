@@ -32,7 +32,7 @@ public class Automotive implements Serializable {
 	public void setModel(String model) {this.model = model;}
 	public void setBasePrice(double price) {basePrice = price;}
 	public void setOption(String line) {
-		optionsArr[optPos].setOption(line, optPos);
+		optionsArr[optPos].setOption(line);
 		optPos++;
 	}
 	public String toString() {
@@ -42,7 +42,7 @@ public class Automotive implements Serializable {
 		temp.append(basePrice);
 		temp.append("\n");
 		for(int i = 0; i < optionsArr.length; i++){
-			if(optionsArr[i].getName() != "NULL"){
+			if(!optionsArr[i].getName().equals("NULL")){
 				temp.append(optionsArr[i].toString());
 				temp.append("\n");
 			}

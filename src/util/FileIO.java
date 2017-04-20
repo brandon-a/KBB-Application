@@ -1,7 +1,12 @@
 package util;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import model.Automotive;
 
@@ -41,6 +46,38 @@ public class FileIO implements Serializable {
 			}
 		return tAuto;
 		
+	}
+	
+	public void serializeObject(Automotive auto, String fileName){
+		try {
+			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName));
+			out.writeObject(auto);
+			out.close();
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public Automotive deSerializeObject(String fileName){
+		try {
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName));
+			try {
+				Automotive auto = (Automotive)in.readObject();
+				in.close();
+				return auto;
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 }
