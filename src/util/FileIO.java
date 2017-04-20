@@ -1,3 +1,6 @@
+//Brandon Archbold
+//CIS 35B
+
 package util;
 import java.io.BufferedReader;
 import java.io.FileInputStream;

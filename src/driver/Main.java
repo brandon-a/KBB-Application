@@ -9,7 +9,6 @@ public class Main {
 		FileIO file = new FileIO();
 		Automotive FordZTW = file.buildAutoObject("Ford's Focus Wagon ZTW.txt");
 		
-
 		//Print attributes before serialization
 
 		System.out.println(FordZTW.toString());
