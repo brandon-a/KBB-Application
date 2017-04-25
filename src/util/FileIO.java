@@ -44,7 +44,7 @@ public class FileIO implements Serializable {
 				}
 				buff.close();
 			} catch (IOException e) {
-				System.out.println("Error ­­ " + e.toString());
+				System.out.println("Error ï¿½ï¿½ " + e.toString());
 				return null;
 			}
 		return tAuto;
@@ -75,6 +75,7 @@ public class FileIO implements Serializable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			in.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

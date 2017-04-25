@@ -4,8 +4,6 @@
 package model;
 import java.io.Serializable;
 
-import util.FileIO;
-
 public class Automotive implements Serializable {
 
 	private static final long serialVersionUID = 1L;
