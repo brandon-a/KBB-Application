@@ -1,29 +1,20 @@
 package driver;
-import model.*;
-import util.*;
+import adapter.*;
 
 public class Main {
 
 	public static void main(String[] args) {
 		//Build Automobile Object from a file.
-		FileIO file = new FileIO();
-		Automotive FordZTW = file.buildAutoObject("Ford's Focus Wagon ZTW.txt");
+		BuildAuto FordZTW = new BuildAuto();
+		FordZTW.buildAuto("Ford's Focus Wagon ZTW.txt");
 		
 		//Print attributes before serialization
 
-		System.out.println(FordZTW.toString());
-
-		//Serialize the object
-
-		file.serializeObject(FordZTW, "Ford_ZTW.dat");
-
-		//Deserialize the object and read it into memory.
-
-		Automotive newFordZTW = file.deSerializeObject("Ford_ZTW.dat");
+		System.out.println(FordZTW.printAuto("Ford's Focus Wagon ZTW"));
 
 		//Print new attributes.
 
-		System.out.println(newFordZTW.toString());
+		System.out.println(FordZTW.printAuto("Ford's Focus Wagon ZTW"));
 
 	}
 
