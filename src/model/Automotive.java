@@ -38,10 +38,6 @@ public class Automotive implements Serializable {
 		optionsArr[optPos].setOption(line);
 		optPos++;
 	}
-	public void setSpecificOptionSet(int i, String name){
-		
-	}
-	
 	
 	public void updateOptionSetName(String originalName, String newName){
 		optionsArr[findOptionSet(originalName)].setName(newName);
@@ -67,10 +63,12 @@ public class Automotive implements Serializable {
 		return -1;
 	}
 	
+	//finds a specific option given an optionset and a name
 	public int findOption(int optionSetLocation, String option){
 		return optionsArr[optionSetLocation].findOption(option);
 	}
 	
+	//deletes an option set and all of it's contents
 	public void deleteOptionSet(int location){
 		if(location >= 0 && location < 50 && optionsArr[location].getCost() != -1.0){
 			optionsArr[location].setName("NULL");
