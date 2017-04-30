@@ -10,15 +10,11 @@ public class Automotive implements Serializable {
 	private String model = "NULL";
 	private double basePrice = -1.0;
 	private double totalPrice = -1.0;
-	private OptionSet[] optionsArr = new OptionSet[50]; 
+	private OptionSet[] optionsArr; 
 	private int optPos = 0;
 	
 	//Automotive Constructor
-	public Automotive() {
-		for(int i = 0; i < optionsArr.length; i++){
-			optionsArr[i] = new OptionSet();
-		}
-	};
+	public Automotive() {};
 	//Constructor with model name price and optionset
 	public Automotive(String model, double price, OptionSet[] options){
 		this.model = model;
@@ -33,6 +29,12 @@ public class Automotive implements Serializable {
 	
 	public void setModel(String model) {this.model = model;}
 	public void setBasePrice(double price) {basePrice = price;}
+	public void setOptionSetSize(int size) {
+		optionsArr = new OptionSet[size];
+		for(int i = 0; i < optionsArr.length; i++){
+			optionsArr[i] = new OptionSet();
+		}
+	}
 	//takes a string and creates an optionSet
 	public void setOption(String line) {
 		optionsArr[optPos].setOption(line);
@@ -43,7 +45,7 @@ public class Automotive implements Serializable {
 		optionsArr[findOptionSet(originalName)].setName(newName);
 	}
 	
-	public void updateOptionPrice(String optionSetName, String name, int newPrice){
+	public void updateOptionPrice(String optionSetName, String name, double newPrice){
 		optionsArr[findOptionSet(optionSetName)].updateOptionPrice(name, newPrice);
 	}
 	

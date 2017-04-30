@@ -12,16 +12,12 @@ public class OptionSet implements Serializable {
 	//instance variables
 	private String name = "NULL";
 	private Double costOfSelection = -1.0;
-	private Option[] optionArr = new Option[50];
+	private Option[] optionArr;
 	private int selection = -1;
 	private int optPos = 0;
 	
 	//Default constructor
-	OptionSet() {
-		for(int i = 0; i < optionArr.length; i++){
-			optionArr[i] = new Option();
-		}
-	}
+	OptionSet() {}
 	
 	//Constructor
 	OptionSet(String name, Option[] options){
@@ -60,14 +56,22 @@ public class OptionSet implements Serializable {
 	protected void setCost(double cost) {costOfSelection = cost;}
 	protected void setOption(String option){
 		String[] namNOptions = option.split(":");
-		name = namNOptions[0];
-		String[] optionSArr = namNOptions[1].split(", ");
+		name = namNOptions[1];
+		optionArr = new Option[Integer.parseInt(namNOptions[0])];		// sets the size of the OptionsArr
+		createOptionArr();
+		String[] optionSArr = namNOptions[2].split(", ");
 		int length = optionSArr.length;
 		for(int i = 0; i < length; i+=2){
 			optionArr[optPos].setSelection(optionSArr[i]);
 			optionArr[optPos].setCost(Double.parseDouble(optionSArr[i+1]));
 			optPos++;
 			}
+	}
+	
+	protected void createOptionArr(){
+		for(int i = 0; i < optionArr.length; i++){
+			optionArr[i] = new Option();
+		}
 	}
 	
 	protected void deleteOption(int location){

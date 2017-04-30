@@ -37,8 +37,11 @@ public class FileIO implements Serializable {
 						else if(line.startsWith("Base:")){
 							tAuto.setBasePrice(Double.parseDouble(line.substring(5)));
 						}
-						else if(line.startsWith("Name:")){
-							tAuto.setModel(line.substring(5));
+						else if(line.startsWith("Model:")){
+							tAuto.setModel(line.substring(6));
+						}
+						else if(line.startsWith("NumOptionSet:")){
+							tAuto.setOptionSetSize(Integer.parseInt(line.substring(13)));
 						}
 					}
 				}
