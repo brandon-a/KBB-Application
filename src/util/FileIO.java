@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+
+import exception.AutoException;
 import model.Automobile;
 
 public class FileIO implements Serializable {
@@ -19,7 +21,7 @@ public class FileIO implements Serializable {
 	public FileIO(){}
 	
 	//Reads the file line by line and returns an array of strings.
-	public Automobile buildAutoObject(String fileName){
+	public Automobile buildAutoObject(String fileName) throws AutoException{
 		Automobile tAuto = new Automobile();
 		try {
 				FileReader file = new FileReader(fileName);
@@ -46,13 +48,16 @@ public class FileIO implements Serializable {
 					}
 				}
 				buff.close();
+			} catch (FileNotFoundException e) {
+				throw new AutoException(AutoException.errorType.FILE_NOT_FOUND, "File not found, please check the path and file name.");
 			} catch (IOException e) {
-				System.out.println("Error �� " + e.toString());
+				System.out.println("Error " + e.toString());
 				return null;
-			}
+			} 
 		return tAuto;
 		
 	}
+	
 	
 	public void serializeObject(Automobile auto, String fileName){
 		try {
