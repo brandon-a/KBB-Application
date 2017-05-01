@@ -4,7 +4,7 @@
 package model;
 import java.io.Serializable;
 
-public class Automotive implements Serializable {
+public class Automobile implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String model = "NULL";
@@ -14,9 +14,9 @@ public class Automotive implements Serializable {
 	private int optPos = 0;
 	
 	//Automotive Constructor
-	public Automotive() {};
+	public Automobile() {};
 	//Constructor with model name price and optionset
-	public Automotive(String model, double price, OptionSet[] options){
+	public Automobile(String model, double price, OptionSet[] options){
 		this.model = model;
 		basePrice = price;
 		optionsArr = options;

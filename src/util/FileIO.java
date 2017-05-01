@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import model.Automotive;
+import model.Automobile;
 
 public class FileIO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -19,8 +19,8 @@ public class FileIO implements Serializable {
 	public FileIO(){}
 	
 	//Reads the file line by line and returns an array of strings.
-	public Automotive buildAutoObject(String fileName){
-		Automotive tAuto = new Automotive();
+	public Automobile buildAutoObject(String fileName){
+		Automobile tAuto = new Automobile();
 		try {
 				FileReader file = new FileReader(fileName);
 				BufferedReader buff = new BufferedReader(file);
@@ -54,7 +54,7 @@ public class FileIO implements Serializable {
 		
 	}
 	
-	public void serializeObject(Automotive auto, String fileName){
+	public void serializeObject(Automobile auto, String fileName){
 		try {
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName));
 			out.writeObject(auto);
@@ -67,11 +67,11 @@ public class FileIO implements Serializable {
 		}
 	}
 	
-	public Automotive deSerializeObject(String fileName){
+	public Automobile deSerializeObject(String fileName){
 		try {
 			ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName));
 			try {
-				Automotive auto = (Automotive)in.readObject();
+				Automobile auto = (Automobile)in.readObject();
 				in.close();
 				return auto;
 			} catch (ClassNotFoundException e) {
