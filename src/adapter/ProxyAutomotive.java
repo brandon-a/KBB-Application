@@ -18,6 +18,7 @@ public abstract class ProxyAutomotive {
 		}
 		e.log("errorLog.txt");
 	}}
+	public Automobile getAuto() {return auto;}
 	public String printAuto(String modelName) {return auto.toString();}
 	public void updateOptionSetName(String Modelname, String OptionSetname, String newName) {auto.updateOptionSetName(OptionSetname, newName);}
 	public void updateOptionPrice(String Modelname, String OptionName, String Option, double newPrice) {auto.updateOptionPrice(OptionName, Option, newPrice);}

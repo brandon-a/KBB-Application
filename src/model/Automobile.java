@@ -3,20 +3,22 @@
 
 package model;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Automobile implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	private String make = "NULL";
 	private String model = "NULL";
 	private double basePrice = -1.0;
 	private double totalPrice = -1.0;
-	private OptionSet[] optionsArr; 
+	private ArrayList<OptionSet> optionsArr; 
 	private int optPos = 0;
 	
 	//Automotive Constructor
 	public Automobile() {};
 	//Constructor with model name price and optionset
-	public Automobile(String model, double price, OptionSet[] options){
+	public Automobile(String model, double price, ArrayList<OptionSet> options){
 		this.model = model;
 		basePrice = price;
 		optionsArr = options;
@@ -25,38 +27,40 @@ public class Automobile implements Serializable {
 	public String getModel() {return model;}
 	public double getBasePrice() {return basePrice;}
 	public double gettotalPrice() {return totalPrice;}
-	public OptionSet getOptionSet(int choice) {return optionsArr[choice];}
+	public OptionSet getOptionSet(int choice) {return optionsArr.get(choice);}
+	public String getMake() {return make;}
 	
+	public void setMake(String make) {this.make = make;}
 	public void setModel(String model) {this.model = model;}
 	public void setBasePrice(double price) {basePrice = price;}
 	public void setOptionSetSize(int size) {
-		optionsArr = new OptionSet[size];
-		for(int i = 0; i < optionsArr.length; i++){
-			optionsArr[i] = new OptionSet();
+		optionsArr = new ArrayList<OptionSet>(size);
+		for(int i = 0; i < size; i++){
+			optionsArr.add(new OptionSet());
 		}
 	}
 	//takes a string and creates an optionSet
 	public void setOption(String line) {
-		optionsArr[optPos].setOption(line);
+		optionsArr.get(optPos).setOption(line);
 		optPos++;
 	}
 	
 	public void updateOptionSetName(String originalName, String newName){
-		optionsArr[findOptionSet(originalName)].setName(newName);
+		optionsArr.get(findOptionSet(originalName)).setName(newName);
 	}
 	
 	public void updateOptionPrice(String optionSetName, String name, double newPrice){
-		optionsArr[findOptionSet(optionSetName)].updateOptionPrice(name, newPrice);
+		optionsArr.get(findOptionSet(optionSetName)).updateOptionPrice(name, newPrice);
 	}
 	
 	public void updateOptionName(String optionSetName, String oldName, String newName){
-		optionsArr[findOptionSet(optionSetName)].updateOptionName(oldName, newName);
+		optionsArr.get(findOptionSet(optionSetName)).updateOptionName(oldName, newName);
 	}
 	
 	//Finds an option location given the name of the option
 	public int findOptionSet(String input){
-		for(int i = 0; i < optionsArr.length; i++){
-			if(input.equalsIgnoreCase(optionsArr[i].getName())){
+		for(int i = 0; i < optionsArr.size(); i++){
+			if(input.equalsIgnoreCase(optionsArr.get(i).getName())){
 				System.out.println(input + " was found at location " + i + ".");
 				return i;
 			}	
@@ -67,17 +71,17 @@ public class Automobile implements Serializable {
 	
 	//finds a specific option given an optionset and a name
 	public int findOption(int optionSetLocation, String option){
-		return optionsArr[optionSetLocation].findOption(option);
+		return optionsArr.get(optionSetLocation).findOption(option);
 	}
 	
 	//deletes an option set and all of it's contents
 	public void deleteOptionSet(int location){
-		if(location >= 0 && location < 50 && optionsArr[location].getCost() != -1.0){
-			optionsArr[location].setName("NULL");
-			optionsArr[location].setCost(-1.0);
-			for(int i = 0; i < optionsArr[location].getOptionArr().length; i++)
-				optionsArr[location].deleteOption(i);
-			optionsArr[location].selectOption(-1);
+		if(location >= 0 && location < 50 && optionsArr.get(location).getCost() != -1.0){
+			optionsArr.get(location).setName("NULL");
+			optionsArr.get(location).setCost(-1.0);
+			for(int i = 0; i < optionsArr.get(location).getOptionArr().size(); i++)
+				optionsArr.get(location).deleteOption(i);
+			optionsArr.get(location).selectOption(-1);
 			System.out.println("Option " + location + " successfully deleted.");
 		}
 		else
@@ -91,9 +95,9 @@ public class Automobile implements Serializable {
 		temp.append("\nBase:");
 		temp.append(basePrice);
 		temp.append("\n");
-		for(int i = 0; i < optionsArr.length; i++){
-			if(!optionsArr[i].getName().equals("NULL")){
-				temp.append(optionsArr[i].toString());
+		for(int i = 0; i < optionsArr.size(); i++){
+			if(!optionsArr.get(i).getName().equals("NULL")){
+				temp.append(optionsArr.get(i).toString());
 				temp.append("\n");
 			}
 		}
