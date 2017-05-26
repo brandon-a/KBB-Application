@@ -8,7 +8,7 @@ import util.FileIO;
 public abstract class ProxyAutomotive {
 
 	private static Automobile auto = new Automobile();
-	private LinkedHashMap<String, Automobile> vehicles = new LinkedHashMap<String, Automobile>();
+	private static LinkedHashMap<String, Automobile> vehicles = new LinkedHashMap<String, Automobile>();
 	private static FileIO fileIO = new FileIO();
 	private static AutoException autoEx = new AutoException();
 	public void buildAuto(String fileName) {try {

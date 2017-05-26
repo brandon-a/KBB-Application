@@ -1,5 +1,5 @@
 package scale;
 
-public class EditOptions {
+public class EditOptions extends Thread {
 
 }

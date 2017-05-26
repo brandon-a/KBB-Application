@@ -30,30 +30,30 @@ public class Automobile implements Serializable {
 	public OptionSet getOptionSet(int choice) {return optionsArr.get(choice);}
 	public String getMake() {return make;}
 	
-	public void setMake(String make) {this.make = make;}
-	public void setModel(String model) {this.model = model;}
-	public void setBasePrice(double price) {basePrice = price;}
-	public void setOptionSetSize(int size) {
+	public synchronized void setMake(String make) {this.make = make;}
+	public synchronized void setModel(String model) {this.model = model;}
+	public synchronized void setBasePrice(double price) {basePrice = price;}
+	public synchronized void setOptionSetSize(int size) {
 		optionsArr = new ArrayList<OptionSet>(size);
 		for(int i = 0; i < size; i++){
 			optionsArr.add(new OptionSet());
 		}
 	}
 	//takes a string and creates an optionSet
-	public void setOption(String line) {
+	public synchronized void setOption(String line) {
 		optionsArr.get(optPos).setOption(line);
 		optPos++;
 	}
 	
-	public void updateOptionSetName(String originalName, String newName){
+	public synchronized void updateOptionSetName(String originalName, String newName){
 		optionsArr.get(findOptionSet(originalName)).setName(newName);
 	}
 	
-	public void updateOptionPrice(String optionSetName, String name, double newPrice){
+	public synchronized void updateOptionPrice(String optionSetName, String name, double newPrice){
 		optionsArr.get(findOptionSet(optionSetName)).updateOptionPrice(name, newPrice);
 	}
 	
-	public void updateOptionName(String optionSetName, String oldName, String newName){
+	public synchronized void updateOptionName(String optionSetName, String oldName, String newName){
 		optionsArr.get(findOptionSet(optionSetName)).updateOptionName(oldName, newName);
 	}
 	
@@ -75,7 +75,7 @@ public class Automobile implements Serializable {
 	}
 	
 	//deletes an option set and all of it's contents
-	public void deleteOptionSet(int location){
+	public synchronized void deleteOptionSet(int location){
 		if(location >= 0 && location < 50 && optionsArr.get(location).getCost() != -1.0){
 			optionsArr.get(location).setName("NULL");
 			optionsArr.get(location).setCost(-1.0);
