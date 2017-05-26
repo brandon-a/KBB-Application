@@ -10,6 +10,7 @@ public class Automobile implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String make = "NULL";
 	private String model = "NULL";
+	private int year;
 	private double basePrice = -1.0;
 	private double totalPrice = -1.0;
 	private ArrayList<OptionSet> optionsArr; 
@@ -29,10 +30,12 @@ public class Automobile implements Serializable {
 	public double gettotalPrice() {return totalPrice;}
 	public OptionSet getOptionSet(int choice) {return optionsArr.get(choice);}
 	public String getMake() {return make;}
+	public int getYear() {return year;}
 	
+	public synchronized void setYear(int year) {this.year = year;}
 	public synchronized void setMake(String make) {this.make = make;}
 	public synchronized void setModel(String model) {this.model = model;}
-	public synchronized void setBasePrice(double price) {basePrice = price;}
+	public synchronized void setBasePrice(double price) {basePrice = price; totalPrice = price;}
 	public synchronized void setOptionSetSize(int size) {
 		optionsArr = new ArrayList<OptionSet>(size);
 		for(int i = 0; i < size; i++){
@@ -55,6 +58,13 @@ public class Automobile implements Serializable {
 	
 	public synchronized void updateOptionName(String optionSetName, String oldName, String newName){
 		optionsArr.get(findOptionSet(optionSetName)).updateOptionName(oldName, newName);
+	}
+	
+	//allows the user to select an option
+	public synchronized void chooseOptionChoice(String optionSetName, String optionName){
+		int setNum = findOptionSet(optionSetName);
+		optionsArr.get(setNum).setOptionChoice(optionName);
+		totalPrice += optionsArr.get(setNum).getCost();
 	}
 	
 	//Finds an option location given the name of the option
@@ -90,10 +100,16 @@ public class Automobile implements Serializable {
 	
 	//Converts the object into a string
 	public String toString() {
-		StringBuilder temp = new StringBuilder("Name:");
+		StringBuilder temp = new StringBuilder("Make:");
+		temp.append(make);
+		temp.append("\nModel:");
 		temp.append(model);
+		temp.append("\nYear:");
+		temp.append(year);
 		temp.append("\nBase:");
 		temp.append(basePrice);
+		temp.append("\nTotal Price:");
+		temp.append(totalPrice);
 		temp.append("\n");
 		for(int i = 0; i < optionsArr.size(); i++){
 			if(!optionsArr.get(i).getName().equals("NULL")){

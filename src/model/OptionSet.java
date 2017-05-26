@@ -60,7 +60,10 @@ public class OptionSet implements Serializable {
 	}
 	
 	//setters
-	protected void setOptionChoice(String optionName) {selection = findOption(optionName);}
+	protected void setOptionChoice(String optionName) {
+		selection = findOption(optionName);
+		costOfSelection = optionArr.get(selection).getCost();
+		}
 	protected void setName(String name) {this.name = name;}
 	protected void setCost(double cost) {costOfSelection = cost;}
 	protected void setOption(String option){
