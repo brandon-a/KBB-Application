@@ -48,6 +48,11 @@ public class Automobile implements Serializable {
 		optPos++;
 	}
 	
+	public synchronized void setOptionProp(String line){
+		optionsArr.get(optPos).setOptionProp(line);
+		optPos++;
+	}
+	
 	public synchronized void updateOptionSetName(String originalName, String newName){
 		optionsArr.get(findOptionSet(originalName)).setName(newName);
 	}

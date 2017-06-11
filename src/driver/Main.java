@@ -1,6 +1,7 @@
 package driver;
 import adapter.*;
 import scale.EditOptions;
+import server.Server;
 
 public class Main {
 
@@ -12,15 +13,12 @@ public class Main {
 		
 		autos.buildAuto(fileName);
 		
-		EditOptions e1 = new EditOptions(autos, key, "Transmission", "manual");
-		EditOptions e2 = new EditOptions(autos, key, "Brakes/Traction Control", "ABS with Advanced Trac");
-		
-		e1.start();
-		e2.start();
+		Server server = new Server();
+		server.run();
+	
 		
 		//Print attributes with invalid file name, check error log for details.
 
-		System.out.println(autos.printAuto(key));
 
 	}
 

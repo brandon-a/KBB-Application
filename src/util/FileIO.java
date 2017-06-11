@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Properties;
 
 import exception.AutoException;
 import model.Automobile;
@@ -19,6 +20,24 @@ public class FileIO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public FileIO(){}
+	
+	public Automobile buildAutoObjectFromPropFile(Properties props){
+		Automobile auto = new Automobile();
+		auto.setMake(props.getProperty("Make"));
+		auto.setModel(props.getProperty("Model"));
+		auto.setYear(Integer.parseInt(props.getProperty("Year")));
+		auto.setBasePrice(Double.parseDouble(props.getProperty("Base")));
+		auto.setOptionSetSize(Integer.parseInt(props.getProperty("NumOptions")));
+		
+		int optionNum = 1;
+		String option = props.getProperty("Option" + optionNum);
+		while(!(option == null)){
+			auto.setOptionProp(option);
+			optionNum++;
+			option = props.getProperty("Option" + optionNum);
+		}
+		return auto;
+	}
 	
 	//Reads the file line by line and returns an array of strings.
 	public Automobile buildAutoObject(String fileName) throws AutoException{

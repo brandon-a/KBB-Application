@@ -83,6 +83,24 @@ public class OptionSet implements Serializable {
 			}
 	}
 	
+	protected void setOptionProp(String option){
+		String[] namNOptions = option.split(":");
+		name = namNOptions[0];
+		int arrSize = namNOptions.length;
+		optionArr = new ArrayList<Option>(arrSize);		// sets the size of the OptionsArr
+		String[] optionSArr = namNOptions[1].split(", ");
+		int length = optionSArr.length;
+		for(int i = 0; i < length; i++){
+			optionArr.add(new Option());
+		}
+		optPos = 0;
+		for(int i = 0; i < length; i+=2){
+			optionArr.get(optPos).setSelection(optionSArr[i]);
+			optionArr.get(optPos).setCost(Double.parseDouble(optionSArr[i+1]));
+			optPos++;
+			}
+	}
+	
 	protected void createOptionArr(){
 		for(int i = 0; i < optionArr.size(); i++){
 			optionArr.add(new Option());
