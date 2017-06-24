@@ -134,4 +134,15 @@ public class OptionSet implements Serializable {
 		return temp.toString();
 	}
 	
+	public String displayListOfOptions() {
+		StringBuilder temp = new StringBuilder();
+		for(int i = 0; i < optionArr.size(); i++){
+			if(!optionArr.get(i).getSelection().equals("NULL")){
+				temp.append(optionArr.get(i).getSelection());
+				temp.append("\n");
+			}
+		}
+		return temp.toString();
+	}
+	
 }

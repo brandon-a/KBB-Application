@@ -1,0 +1,14 @@
+Make=Chevrolet
+Model=Suburban 1500
+Year=2006
+Base=9432
+NumOptions=9
+Option1=Color:Beige, 0, Black, 0, Blue, 0, Brown, 0, Burgundy, 0, Gold, 0, Gray, 0, Green, 0, Orange, 0, Pink, 0, Purple Red, 0, Silver White Yellow, 0
+Option2=Engine:6.0 L, 500, 5.3 L, 0
+Option3=Suspension:Standard, 0, Autoride, 200, StabiliTrack, 300, ABS, 1250
+Option4=Air Conditioning:present, 800, not present, 0
+Option5=Radio:present, 300, not present, 0
+Option6=Sun Roof:present, 180, not present, 0
+Option7=Privacy Glass:present, 765, not present, 0
+Option8=Roof Rack:present, 150, not present, 0
+Option9=Alloy Wheels:present, 980, not present, 0

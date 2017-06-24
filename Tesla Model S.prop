@@ -1,0 +1,14 @@
+Make=Tesla
+Model=Model S
+Year=2017
+Base=69200
+NumOptions=9
+Option1=Color:Black, 0, Deep Blue Metallic, 1000, Midnight Silver Metallic, 1000, Obsidian Black Metallic, 1000, Pearl White Multi-Coat, 1500, Red Multi-Coat, 1500, Silver Metallic, 1000
+Option2=Packages:Premium Upgrades Pkg, 3500, Subzero Weather Pkg, 1000
+Option3=Suspension:Standard, 0, Smart Air, 2500
+Option4=Autopilot:present, 5000, not present, 0
+Option5=Radio:standard, 2500, Ultra High Fidelity Sound, 0
+Option6=Sun Roof:present, 2000, not present, 0
+Option7=Battery Charger Upgrade:present, 1500, not present, 0
+Option8=Full Self-Driving Capability:present, 3000, not present, 0
+Option9=Federal Tax Credit:present, -7500, not present, 0

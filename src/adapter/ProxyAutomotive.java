@@ -1,5 +1,9 @@
 package adapter;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import exception.AutoException;
 import model.*;
@@ -7,19 +11,22 @@ import util.FileIO;
 
 public abstract class ProxyAutomotive {
 
-	private static Automobile auto = new Automobile();
+	private Automobile auto = new Automobile();
 	private static LinkedHashMap<String, Automobile> vehicles = new LinkedHashMap<String, Automobile>();
-	private static FileIO fileIO = new FileIO();
-	private static AutoException autoEx = new AutoException();
+	private FileIO fileIO = new FileIO();
+	private AutoException autoEx = new AutoException();
 	
 	
 	public void buildAuto(String fileName) {try {
-		auto = fileIO.buildAutoObject(fileName);
+		if(fileName.contains(".txt"))
+			auto = fileIO.buildAutoObject(fileName);
+		else if (fileName.contains(".prop"))
+			auto = fileIO.buildAutoObjectFromPropFile(fileIO.readPropFile(fileName));
 		StringBuilder key = new StringBuilder();
 		key.append(auto.getYear());
-		key.append("-");
+		key.append(" ");
 		key.append(auto.getMake());
-		key.append("-");
+		key.append(" ");
 		key.append(auto.getModel());
 		vehicles.put(key.toString(), auto);
 	} catch (AutoException e) {
@@ -44,6 +51,23 @@ public abstract class ProxyAutomotive {
 		} catch (NullPointerException e){
 			System.out.println("Key not found! Cannot find specified car with Key Value: " + key);
 		}
+	}
+	
+	public ArrayList<String> getAvalibleModels() {
+		Set<Entry<String, Automobile>> set = vehicles.entrySet();
+		Iterator<Entry<String, Automobile>> step = set.iterator();
+		ArrayList<String> autoArr = new ArrayList<String>();
+		while(step.hasNext()){
+			StringBuilder temp = new StringBuilder();
+			Automobile tAuto = step.next().getValue();
+			temp.append(tAuto.getYear());
+			temp.append(" ");
+			temp.append(tAuto.getMake());
+			temp.append(" ");
+			temp.append(tAuto.getModel());
+			autoArr.add(temp.toString());
+		}
+		return autoArr;
 	}
 	public void updateOptionSetName(String key, String Modelname, String OptionSetname, String newName) {vehicles.get(key).updateOptionSetName(OptionSetname, newName);}
 	public void updateOptionPrice(String key, String Modelname, String OptionName, String Option, double newPrice) {vehicles.get(key).updateOptionPrice(OptionName, Option, newPrice);}

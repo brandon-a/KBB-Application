@@ -83,6 +83,18 @@ public class FileIO implements Serializable {
 		
 	}
 	
+	public Properties readPropFile(String fileName){
+		FileInputStream inputStream;
+		Properties prop = new Properties();
+		try {
+			inputStream = new FileInputStream(fileName);
+			prop.load(inputStream);
+		} catch (IOException e1) {
+			System.out.println("File IO error!");
+		}
+		return prop;
+	}
+	
 	
 	public void serializeObject(Automobile auto, String fileName){
 		try {
